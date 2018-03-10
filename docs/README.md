@@ -151,35 +151,35 @@ const wordMachine = Machine({
   parallel: true,
   states: {
     bold: {
-      initial: 'off',
+      initial: 'inactive',
       states: {
-        on: {
-          on: { TOGGLE_BOLD: 'off' }
+        active: {
+          on: { TOGGLE_BOLD: 'inactive' }
         },
-        off: {
-          on: { TOGGLE_BOLD: 'on' }
+        inactive: {
+          on: { TOGGLE_BOLD: 'active' }
         }
       }
     },
     underline: {
-      initial: 'off',
+      initial: 'inactive',
       states: {
-        on: {
-          on: { TOGGLE_UNDERLINE: 'off' }
+        active: {
+          on: { TOGGLE_UNDERLINE: 'inactive' }
         },
-        off: {
-          on: { TOGGLE_UNDERLINE: 'on' }
+        inactive: {
+          on: { TOGGLE_UNDERLINE: 'active' }
         }
       }
     },
     italics: {
-      initial: 'off',
+      initial: 'inactive',
       states: {
-        on: {
-          on: { TOGGLE_ITALICS: 'off' }
+        active: {
+          on: { TOGGLE_ITALICS: 'inactive' }
         },
-        off: {
-          on: { TOGGLE_ITALICS: 'on' }
+        inactive: {
+          on: { TOGGLE_ITALICS: 'active' }
         }
       }
     },
@@ -201,29 +201,29 @@ const wordMachine = Machine({
 });
 
 const boldState = wordMachine
-  .transition('bold.off', 'TOGGLE_BOLD')
+  .transition('bold.inactive', 'TOGGLE_BOLD')
   .value;
 
 // {
-//   bold: 'on',
-//   italics: 'off',
-//   underline: 'off',
+//   bold: 'active',
+//   italics: 'inactive',
+//   underline: 'inactive',
 //   list: 'none'
 // }
 
 const nextState = wordMachine
   .transition({
-    bold: 'off',
-    italics: 'off',
-    underline: 'on',
+    bold: 'inactive',
+    italics: 'inactive',
+    underline: 'active',
     list: 'bullets'
   }, 'TOGGLE_ITALICS')
   .value;
 
 // {
-//   bold: 'off',
-//   italics: 'on',
-//   underline: 'on',
+//   bold: 'inactive',
+//   italics: 'active',
+//   underline: 'active',
 //   list: 'bullets'
 // }
 ```
